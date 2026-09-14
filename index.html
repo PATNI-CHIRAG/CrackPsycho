@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GMRC Color Reaction Test - CrackPsycho RDSO Psycho Exam Mock</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%2324135f%22/><circle cx=%2250%22 cy=%2250%22 r=%2225%22 fill=%22%23ff2222%22/></svg>">
+</head>
+
+<body>
+
+    <!-- Top Header -->
+    <header class="top-header">
+        <div class="brand-container">
+            <a href="#" class="brand-logo">
+                CRACK<span class="highlight">PSYCHO</span>
+            </a>
+            <div class="brand-badge">GMRC &bull; METRO CBAT</div>
+        </div>
+
+        <div class="header-meta">
+            <div class="candidate-pill" id="nav-candidate-pill">
+                <span>Candidate: <strong id="nav-candidate-name">Candidate</strong></span>
+                <span>Roll: <strong id="nav-roll-no">GMRC-100234</strong></span>
+            </div>
+            <button class="audio-toggle-btn" id="audio-toggle-btn" title="Toggle audio cues">
+                <span>🔊</span> Sound: ON
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Wrapper -->
+    <main class="main-wrapper">
+
+        <!-- ==================================================================
+             SCREEN 1: Instructions & Candidate Details
+             ================================================================== -->
+        <section class="app-screen" id="screen-instructions">
+            <div class="instructions-card">
+                <div class="card-banner-header">
+                    <div>
+                        <h1>Test Battery - 6: Reaction Time Test</h1>
+                        <div class="subtitle">GMRC Station Controller / Train Operator (SC/TO) Psychometric Assessment</div>
+                    </div>
+                    <div class="brand-badge">RDSO Pattern</div>
+                </div>
+
+                <div class="instructions-body">
+
+                    <!-- Candidate Details Bar -->
+                    <div class="candidate-setup-bar">
+                        <div class="form-group-inline">
+                            <label for="input-candidate-name">Candidate Name:</label>
+                            <input type="text" id="input-candidate-name" value="Candidate" placeholder="Enter full name">
+                        </div>
+                        <div class="form-group-inline">
+                            <label for="input-roll-no">Roll Number:</label>
+                            <input type="text" id="input-roll-no" value="GMRC-100234" placeholder="Enter roll number">
+                        </div>
+                        <div class="form-group-inline">
+                            <label>Post:</label>
+                            <span style="font-weight:700; color:var(--primary);">SC / TO (Metro Rail)</span>
+                        </div>
+                    </div>
+
+                    <!-- Dual Language Instructions (English & Hindi) -->
+                    <div class="dual-instruction-grid">
+                        <!-- English Column -->
+                        <div class="instruction-col english">
+                            <div class="col-header">Instructions (English)</div>
+                            <ol class="instructions-list">
+                                <li>Reaction Time Test:
+                                    <ul>
+                                        <li>The reaction time test measures your speed and accuracy in responding to visual stimuli.</li>
+                                        <li>Your reaction time will be recorded in milliseconds using precise computer algorithms.</li>
+                                        <li>You must respond to colored lights as quickly and accurately as possible.</li>
+                                    </ul>
+                                </li>
+                                <li>Test Procedure:
+                                    <ul>
+                                        <li><strong>Press and hold the 'B' key</strong> on your keyboard to trigger the stimulus light.</li>
+                                        <li>Keep holding 'B' until one of the colored lights turns <strong>ON</strong>.</li>
+                                        <li>When a light appears, immediately release 'B' and press the specific button assigned to that color.</li>
+                                        <li>After striking the response key, press and hold <strong>'B'</strong> again for the next stimulus.</li>
+                                    </ul>
+                                </li>
+                                <li>Keyboard Key Color Mapping:
+                                    <ul>
+                                        <li><span class="key-badge red">2</span> &mdash; <strong>Red Light</strong> (Top lamp)</li>
+                                        <li><span class="key-badge yellow">4</span> &mdash; <strong>Yellow Light</strong> (Second lamp)</li>
+                                        <li><span class="key-badge green">8</span> &mdash; <strong>Green Light</strong> (Third lamp)</li>
+                                        <li><span class="key-badge blue">0</span> &mdash; <strong>Blue Light</strong> (Bottom lamp)</li>
+                                        <li><span class="key-badge golden">B</span> &mdash; <strong>Golden Neutral Button</strong> (Hold to initiate / reset)</li>
+                                    </ul>
+                                </li>
+                                <li>Important Exam Rules:
+                                    <ul>
+                                        <li>Releasing 'B' before the required hold duration is a <strong>Premature Release Fault</strong>.</li>
+                                        <li>You have a maximum of <strong>5.00 seconds</strong> to respond after a light appears.</li>
+                                        <li>RDSO Qualifying Criteria: <strong>100% Accuracy</strong> and <strong>T-Score &ge; 42.0000</strong>.</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <!-- Hindi Column -->
+                        <div class="instruction-col hindi">
+                            <div class="col-header">निर्देश (Hindi)</div>
+                            <ol class="instructions-list">
+                                <li>प्रतिक्रिया समय परीक्षण (Reaction Time Test):
+                                    <ul>
+                                        <li>प्रतिक्रिया समय परीक्षण दृश्य संकेतों पर आपकी प्रतिक्रिया की गति और सटीकता को मापता है।</li>
+                                        <li>आपका प्रतिक्रिया समय कंप्यूटर सॉफ्टवेयर द्वारा मिलीसेकंड में मापा जाएगा।</li>
+                                        <li>रंगीन बत्ती जलने पर आपको तुरंत और सही बटन दबाकर प्रतिक्रिया देनी होगी।</li>
+                                    </ul>
+                                </li>
+                                <li>परीक्षण प्रक्रिया (Procedure):
+                                    <ul>
+                                        <li>परीक्षण शुरू करने और बत्ती जलाने के लिए कीबोर्ड पर <strong>'B' बटन दबाकर रखें</strong>।</li>
+                                        <li>जब तक बत्ती नहीं जलती, तब तक 'B' बटन को दबाए रखें।</li>
+                                        <li>जैसे ही कोई रंगीन बत्ती जले, तुरंत 'B' छोड़ें और उस रंग के लिए निर्धारित कुंजी दबाएँ।</li>
+                                        <li>बटन दबाने के बाद, अगली बत्ती के लिए फिर से <strong>'B'</strong> दबाकर रखें।</li>
+                                    </ul>
+                                </li>
+                                <li>कुंजियों के रंग (Key Color Mapping):
+                                    <ul>
+                                        <li><span class="key-badge red">2</span> &mdash; <strong>लाल (Red)</strong> - सबसे ऊपर की बत्ती</li>
+                                        <li><span class="key-badge yellow">4</span> &mdash; <strong>पीला (Yellow)</strong> - दूसरी बत्ती</li>
+                                        <li><span class="key-badge green">8</span> &mdash; <strong>हरा (Green)</strong> - तीसरी बत्ती</li>
+                                        <li><span class="key-badge blue">0</span> &mdash; <strong>नीला (Blue)</strong> - सबसे नीचे की बत्ती</li>
+                                        <li><span class="key-badge golden">B</span> &mdash; <strong>सुनहरा/न्यूट्रल बटन</strong> (दबाकर शुरू करने के लिए)</li>
+                                    </ul>
+                                </li>
+                                <li>महत्वपूर्ण परीक्षा नियम:
+                                    <ul>
+                                        <li>बत्ती जलने से पहले 'B' बटन छोड़ना <strong>समयपूर्व विमुक्ति त्रुटि</strong> माना जाएगा।</li>
+                                        <li>बत्ती जलने के बाद प्रतिक्रिया देने के लिए अधिकतम <strong>5 सेकंड</strong> का समय मिलेगा।</li>
+                                        <li>RDSO उत्तीर्ण मानदंड: <strong>100% सटीकता</strong> एवं <strong>T-Score &ge; 42.0000</strong> अनिवार्य है।</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Keyboard Diagram Preview -->
+                    <div class="keyboard-diagram-section">
+                        <h3>Official Keyboard Setup Guide (As per RDSO Apparatus Pattern)</h3>
+                        <img src="images/Instruction_Keyboard.png" alt="Keyboard Layout Diagram" class="keyboard-preview-img">
+                    </div>
+
+                    <!-- Agreement & Proceed Button -->
+                    <div class="agreement-bar">
+                        <label class="checkbox-label" for="chk-agreement">
+                            <input type="checkbox" id="chk-agreement">
+                            <span>I have read and understood all instructions. I agree and abide by them. / मैंने सभी निर्देश पढ़ लिए हैं।</span>
+                        </label>
+                        <button class="btn-proceed" id="btn-proceed-instructions" disabled>
+                            Start The Test &rarr;
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             SCREEN 2: Difficulty & Mode Selection
+             ================================================================== -->
+        <section class="app-screen" id="screen-difficulty" style="display: none;">
+            <div class="difficulty-wrapper">
+                <div class="difficulty-card">
+                    <h2>Select Difficulty Level</h2>
+                    <p class="subtitle">Choose the required hold duration and attempt targets for your mock test</p>
+
+                    <div class="difficulty-options">
+                        <!-- Easy -->
+                        <div class="difficulty-option selected" data-diff="easy">
+                            <div style="display:flex; align-items:center; gap:12px;">
+                                <input type="radio" name="difficulty" id="diff-easy" value="easy" checked>
+                                <div class="diff-info">
+                                    <div class="diff-title">Easy Level</div>
+                                    <div class="diff-desc">Hold 'B' for 1.50 seconds (1500 ms) &bull; 25 Target Attempts</div>
+                                </div>
+                            </div>
+                            <span class="diff-badge easy">Easy</span>
+                        </div>
+
+                        <!-- Medium -->
+                        <div class="difficulty-option" data-diff="medium">
+                            <div style="display:flex; align-items:center; gap:12px;">
+                                <input type="radio" name="difficulty" id="diff-medium" value="medium">
+                                <div class="diff-info">
+                                    <div class="diff-title">Medium Level</div>
+                                    <div class="diff-desc">Hold 'B' for 1.20 seconds (1200 ms) &bull; 32 Target Attempts</div>
+                                </div>
+                            </div>
+                            <span class="diff-badge medium">Medium</span>
+                        </div>
+
+                        <!-- Hard -->
+                        <div class="difficulty-option" data-diff="hard">
+                            <div style="display:flex; align-items:center; gap:12px;">
+                                <input type="radio" name="difficulty" id="diff-hard" value="hard">
+                                <div class="diff-info">
+                                    <div class="diff-title">Hard Level (RDSO Actual Speed)</div>
+                                    <div class="diff-desc">Hold 'B' for 0.90 seconds (900 ms) &bull; 40 Target Attempts</div>
+                                </div>
+                            </div>
+                            <span class="diff-badge hard">Hard</span>
+                        </div>
+                    </div>
+
+                    <!-- Mode Selector -->
+                    <div class="mode-selector-box">
+                        <label>Select Test Mode:</label>
+                        <div class="mode-buttons">
+                            <button type="button" class="mode-btn active" data-mode="exam">
+                                ⏱ Standard Exam (60s Limit)
+                            </button>
+                            <button type="button" class="mode-btn" data-mode="practice">
+                                🎯 Practice Mode (Unlimited)
+                            </button>
+                        </div>
+                    </div>
+
+                    <button class="start-exam-btn" id="btn-start-exam">
+                        Enter Reaction Test
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             SCREEN 3: Active Reaction Test Apparatus
+             ================================================================== -->
+        <section class="app-screen" id="screen-test" style="display: none;">
+            <div class="test-layout">
+
+                <!-- Real-Time Status Header Bar -->
+                <div class="test-status-bar">
+                    <div class="stat-item">
+                        <span class="label">Time Remaining</span>
+                        <span class="value timer" id="test-timer-display">60s</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Attempts</span>
+                        <span class="value" id="test-attempts-display">0 / 25</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="label">Current Accuracy</span>
+                        <span class="value" id="test-accuracy-display">100.0%</span>
+                    </div>
+                    <button class="quit-test-btn" id="btn-quit-test">End Test</button>
+                </div>
+
+                <!-- Live Instruction Alert -->
+                <!-- <div class="live-instruction-alert waiting" id="live-instruction">
+                    <span id="live-instruction-text">Press and HOLD 'B' key to trigger light</span>
+                </div> -->
+
+                <!-- Hold Progress Bar
+                <div class="hold-progress-container">
+                    <div class="hold-progress-bar" id="hold-progress-bar"></div>
+                </div> -->
+
+                <!-- Test Stage Container -->
+                <div class="test-stage-container">
+
+                    <!-- Authentic Traffic Light Apparatus Column -->
+                    <div class="apparatus-column">
+                        <div class="apparatus-housing">
+                            <!-- Circular Signal Lamps precisely calibrated over removeBackgroundProject.png -->
+                            <div class="signal-lamp" id="lamp-red" title="Red Light (Key 2)"></div>
+                            <div class="signal-lamp" id="lamp-yellow" title="Yellow Light (Key 4)"></div>
+                            <div class="signal-lamp" id="lamp-green" title="Green Light (Key 8)"></div>
+                            <div class="signal-lamp" id="lamp-blue" title="Blue Light (Key 0)"></div>
+                        </div>
+                    </div>
+
+                    <!-- Virtual Keypad & Controls Column -->
+                    <!-- <div class="controls-column">
+                        <div class="virtual-keypad">
+                            <h4>Interactive On-Screen Response Keypad</h4>
+                            
+                            <div class="keys-grid">
+                                <button class="v-key key-red" id="vkey-2" data-key="2">
+                                    <span>2</span> Red
+                                </button>
+                                <button class="v-key key-yellow" id="vkey-4" data-key="4">
+                                    <span>4</span> Yellow
+                                </button>
+                                <button class="v-key key-green" id="vkey-8" data-key="8">
+                                    <span>8</span> Green
+                                </button>
+                                <button class="v-key key-blue" id="vkey-0" data-key="0">
+                                    <span>0</span> Blue
+                                </button>
+                            </div>
+
+                            <button class="v-key-neutral" id="vkey-b" data-key="b">
+                                <span>&#9679;</span> HOLD 'B' (Neutral)
+                            </button>
+                        </div> -->
+
+                        <!-- <div class="keyboard-shortcut-hint">
+                            <strong>Keyboard Guide:</strong><br>
+                            Hold <code>B</code> with thumb &bull; Strike <code>2</code>, <code>4</code>, <code>8</code>, <code>0</code> with right hand.<br>
+                            <em>(Both main row and Numpad digits are accepted)</em>
+                        </div> -->
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================================================================
+             SCREEN 4: Result Scorecard & RDSO T-Score Evaluation
+             ================================================================== -->
+        <section class="app-screen" id="screen-scorecard" style="display: none;">
+            <div class="scorecard-card">
+                <div class="scorecard-header">
+                    <div>
+                        <h2>Official Psychometric Performance Report</h2>
+                        <div class="scorecard-meta">GMRC Station Controller / Train Operator Aptitude Battery-6</div>
+                    </div>
+                    <div class="brand-badge">RDSO Evaluation</div>
+                </div>
+
+                <div class="scorecard-body">
+
+                    <!-- Candidate Summary -->
+                    <div class="candidate-summary-bar">
+                        <div>Candidate: <strong id="score-candidate-name">Candidate</strong></div>
+                        <div>Roll Number: <strong id="score-roll-no">GMRC-100234</strong></div>
+                        <div>Date: <strong id="score-exam-date">2026-09-11</strong></div>
+                        <div>Level: <strong id="score-difficulty">Easy</strong></div>
+                    </div>
+
+                    <!-- Qualification Verdict Banner -->
+                    <div class="verdict-banner suitable" id="verdict-banner">
+                        <div class="verdict-title" id="verdict-title">RESULT: SUITABLE!</div>
+                        <div class="verdict-subtitle" id="verdict-subtitle">
+                            Candidate meets the RDSO qualifying standards (T-Score &ge; 42.0000 & 100% Accuracy).
+                        </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="metrics-grid">
+                        <div class="metric-card highlight">
+                            <div class="metric-label">RDSO T-Score</div>
+                            <div class="metric-value" id="metric-t-score">54.2180</div>
+                            <div class="metric-note">Cutoff: &ge; 42.0000</div>
+                        </div>
+
+                        <div class="metric-card highlight">
+                            <div class="metric-label">Accuracy Rate</div>
+                            <div class="metric-value" id="metric-accuracy">100.00%</div>
+                            <div class="metric-note">RDSO Requirement: 100%</div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-label">Average Reaction Time</div>
+                            <div class="metric-value" id="metric-avg-rt">412.5 ms</div>
+                            <div class="metric-note">Benchmark Mean: 485.0 ms</div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-label">Total Attempts</div>
+                            <div class="metric-value" id="metric-total-attempts">25</div>
+                            <div class="metric-note">Completed Trials</div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-label">Correct / Wrong</div>
+                            <div class="metric-value" style="color:var(--success);" id="metric-correct-attempts">25</div>
+                            <div class="metric-note">Wrong: <span id="metric-wrong-attempts" style="color:var(--danger);">0</span></div>
+                        </div>
+
+                        <div class="metric-card">
+                            <div class="metric-label">Consistency (Std Dev)</div>
+                            <div class="metric-value" id="metric-std-dev">45.2 ms</div>
+                            <div class="metric-note">Duration: <span id="metric-time-taken">52 s</span></div>
+                        </div>
+                    </div>
+
+                    <!-- Trial-By-Trial History Table -->
+                    <div class="trial-logs-section">
+                        <h3>
+                            <span>Trial-by-Trial Breakdown</span>
+                            <small style="font-size:0.8rem; color:var(--text-muted); font-weight:normal;">Detailed Response Audit</small>
+                        </h3>
+                        <div class="table-responsive">
+                            <table class="trial-table">
+                                <thead>
+                                    <tr>
+                                        <th>Trial #</th>
+                                        <th>Stimulus Light</th>
+                                        <th>Target Key</th>
+                                        <th>Key Pressed</th>
+                                        <th>Reaction Time</th>
+                                        <th>Evaluation</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trials-table-body">
+                                    <!-- Populated dynamically via app.js -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="scorecard-actions">
+                        <button class="action-btn primary" id="btn-retake-test">Retake Test</button>
+                        <button class="action-btn outline" id="btn-change-diff">Change Level / Mode</button>
+                        <button class="action-btn secondary" id="btn-print-scorecard">Print Scorecard</button>
+                        <button class="action-btn secondary" id="btn-back-home">Instructions</button>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+        <p>GMRC &bull; UPMRC &bull; DMRC &bull; RDSO Computer Based Aptitude Test (CBAT) Reaction Time Simulation</p>
+        <p style="margin-top:4px; font-size:0.75rem; color:#888;">Modeled after Crack Psycho Institute exam engine. Offline exam preparation edition.</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
