@@ -112,21 +112,6 @@
 
 ---
 
-## 🚀 How to Deploy on GitHub Pages
-
-1. **Commit and push all files**:
-   ```bash
-   git add .
-   git commit -m "Deploy CrackPsycho CBAT Suite with complete test details"
-   git push origin main
-   ```
-2. **Enable GitHub Pages**:
-   - In your repository, go to **Settings** &rarr; **Pages** (under *Code and automation*).
-   - Under **Branch**, select `main` and folder `/(root)` &rarr; click **Save**.
-3. **Access Live App**: Within 1–2 minutes, your website will be live at:  
-   👉 **`https://patni-chirag.github.io/CrackPhycho/`**
-
----
 
 ## 💻 Run Locally
 
