@@ -136,25 +136,25 @@
     const DIFFICULTIES = {
         easy: { 
             name: 'Easy', 
-            holdTime: 1500, 
+            holdTime: 0, 
             attemptsCap: 25, 
-            label: '1.5s Hold',
+            label: 'Instant (0s Delay)',
             benchmarkMean: 989.70, // Empirical candidate mean from CrackPsycho
             benchmarkSd: 466.02    // Empirical candidate SD from CrackPsycho
         },
         medium: { 
             name: 'Medium', 
-            holdTime: 1200, 
+            holdTime: 0, 
             attemptsCap: 32, 
-            label: '1.2s Hold',
+            label: 'Instant (0s Delay)',
             benchmarkMean: 901.85, // Empirical candidate mean from CrackPsycho
             benchmarkSd: 253.93    // Empirical candidate SD from CrackPsycho
         },
         hard: { 
             name: 'Hard', 
-            holdTime: 900, 
+            holdTime: 0, 
             attemptsCap: 40, 
-            label: '0.9s Hold',
+            label: 'Instant (0s Delay)',
             benchmarkMean: 829.94, // Empirical candidate mean from CrackPsycho
             benchmarkSd: 127.54    // Empirical candidate SD from CrackPsycho
         }
@@ -166,10 +166,25 @@
         qualifyingAccuracy: 100.0
     };
 
+    // 10 Authentic RDSO Color Reaction Mock Tests
+    const REACTION_MOCK_TESTS = [
+        { id: 1, title: 'Mock Test 01', desc: 'Standard Metro Speed & Accuracy (Balanced 4-Color Sequence)', colors: [2, 4, 8, 0, 8, 2, 0, 4, 2, 8, 4, 0, 2, 0, 8, 4, 8, 2, 4, 0, 0, 8, 2, 4, 8, 0, 2, 4, 8, 0] },
+        { id: 2, title: 'Mock Test 02', desc: 'High-Alert Train Protection (Red & Green Focus)', colors: [2, 8, 2, 8, 4, 2, 8, 0, 2, 8, 8, 2, 4, 8, 2, 0, 8, 2, 8, 4, 2, 8, 2, 0, 8, 2, 4, 8, 2, 8] },
+        { id: 3, title: 'Mock Test 03', desc: 'Station Dispatch Drill (Yellow & Blue Focus)', colors: [4, 0, 4, 0, 2, 4, 0, 8, 4, 0, 0, 4, 8, 0, 4, 2, 0, 4, 0, 8, 4, 0, 4, 2, 0, 4, 8, 0, 4, 0] },
+        { id: 4, title: 'Mock Test 04', desc: 'Fast Alternation Drill (Quick Rhythm Color Shifts)', colors: [2, 4, 8, 0, 2, 4, 8, 0, 8, 4, 2, 0, 0, 2, 4, 8, 4, 2, 0, 8, 2, 0, 4, 8, 8, 0, 2, 4, 4, 8] },
+        { id: 5, title: 'Mock Test 05', desc: 'Emergency Signal Protocol (Critical Red Frequency)', colors: [2, 2, 4, 8, 2, 0, 2, 2, 8, 4, 2, 0, 2, 8, 4, 2, 2, 0, 8, 2, 4, 2, 2, 8, 0, 2, 4, 8, 2, 2] },
+        { id: 6, title: 'Mock Test 06', desc: 'Peak Traffic Hours (Randomized Junction Sequence)', colors: [8, 4, 2, 0, 4, 8, 0, 2, 8, 2, 4, 0, 4, 2, 8, 0, 0, 8, 4, 2, 2, 8, 4, 0, 8, 4, 0, 2, 4, 8] },
+        { id: 7, title: 'Mock Test 07', desc: 'Aspect Transition Drill (Dynamic 4-Color Shift Patterns)', colors: [0, 8, 4, 2, 0, 4, 8, 2, 8, 0, 2, 4, 2, 0, 4, 8, 4, 8, 2, 0, 8, 4, 0, 2, 0, 2, 8, 4, 4, 0] },
+        { id: 8, title: 'Mock Test 08', desc: 'Train Operator Response Drill (Strict RDSO Speed Benchmark)', colors: [2, 8, 4, 0, 8, 2, 4, 0, 2, 8, 0, 4, 4, 2, 8, 0, 8, 4, 2, 0, 0, 2, 8, 4, 2, 8, 4, 0, 4, 8] },
+        { id: 9, title: 'Mock Test 09', desc: 'Night Operations Vigilance (High Visual Contrast Stimuli)', colors: [8, 0, 2, 4, 8, 0, 4, 2, 0, 8, 2, 4, 2, 4, 0, 8, 8, 2, 4, 0, 0, 4, 8, 2, 4, 0, 8, 2, 2, 8] },
+        { id: 10, title: 'Mock Test 10', desc: 'Official RDSO Comprehensive Final (Full Certification Sequence)', colors: [2, 4, 8, 0, 4, 8, 2, 0, 8, 2, 0, 4, 2, 0, 4, 8, 4, 8, 0, 2, 0, 4, 8, 2, 8, 2, 4, 0, 2, 8] }
+    ];
+
     // Runtime state
     const state = {
         candidateName: 'Candidate',
         rollNo: 'GMRC-100234',
+        currentTestId: 1, // 1 to 10
         currentDifficulty: 'easy',
         examMode: 'exam', // 'exam' (60s countdown / max attempts) or 'practice' (unlimited)
         
@@ -271,12 +286,15 @@
         metricCorrectAttempts: document.getElementById('metric-correct-attempts'),
         metricWrongAttempts: document.getElementById('metric-wrong-attempts'),
         metricTimeTaken: document.getElementById('metric-time-taken'),
-        metricStandardDev: document.getElementById('metric-std-dev'),
+        metricStandardDev: document.getElementById('metric-standard-dev') || document.getElementById('metric-std-dev'),
         trialsTableBody: document.getElementById('trials-table-body'),
         btnRetakeTest: document.getElementById('btn-retake-test'),
         btnChangeDiff: document.getElementById('btn-change-diff'),
         btnPrintScorecard: document.getElementById('btn-print-scorecard'),
-        btnBackHome: document.getElementById('btn-back-home')
+        btnBackHome: document.getElementById('btn-back-home'),
+        batteryTabs: document.querySelectorAll('.battery-tab'),
+        allModuleContainers: document.querySelectorAll('.test-module-container'),
+        moduleReaction: document.getElementById('module-reaction')
     };
 
     // ========================================================================
@@ -291,6 +309,47 @@
             screenEl.style.display = 'block';
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        renderReactionTestSelector();
+    }
+
+    function renderReactionTestSelector() {
+        const containers = ['reaction-selector-bar', 'reaction-selector-bar-diff'];
+        containers.forEach(cId => {
+            const el = document.getElementById(cId);
+            if (!el) return;
+            const currentMock = REACTION_MOCK_TESTS[state.currentTestId - 1] || REACTION_MOCK_TESTS[0];
+            el.innerHTML = `
+                <div class="battery-test-selector-card">
+                    <div class="sel-bar-header">
+                        <span class="sel-bar-title">&#128678; COLOR REACTION TEST SELECTOR:</span>
+                        <span class="sel-bar-hint">Active: Mock Test ${String(currentMock.id).padStart(2, '0')} &bull; ${currentMock.desc}</span>
+                    </div>
+                    <div class="test-pill-grid">
+                        ${REACTION_MOCK_TESTS.map(t => `
+                            <button class="test-pill-btn ${state.currentTestId === t.id ? 'active' : ''}" data-reaction-test="${t.id}">
+                                Test ${String(t.id).padStart(2, '0')}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            el.querySelectorAll('[data-reaction-test]').forEach(btn => {
+                btn.onclick = () => {
+                    const testNum = parseInt(btn.getAttribute('data-reaction-test'), 10);
+                    switchReactionTest(testNum);
+                };
+            });
+        });
+    }
+
+    function switchReactionTest(testNum) {
+        state.currentTestId = testNum;
+        clearAllTimeouts();
+        clearLamps();
+        state.testActive = false;
+        state.testOver = false;
+        renderReactionTestSelector();
+        showScreen(dom.screenInstructions);
     }
 
     // ========================================================================
@@ -410,7 +469,7 @@
     }
 
     // ========================================================================
-    // 'B' Key Handling (Hold Mechanics)
+    // 'B' Key Handling (Instant Stimulus - No 1-Second Delay)
     // ========================================================================
     function handleBKeyDown() {
         if (!state.testActive || state.testOver) return;
@@ -418,29 +477,13 @@
         if (state.isBPressed) return; // Already holding
 
         state.isBPressed = true;
-        state.hasCompletedHold = false;
+        state.hasCompletedHold = true;
         state.bPressedStartTime = performance.now();
         setVirtualKeyPressed(dom.vKeyB, true);
+        updateHoldProgress(100);
 
-        const targetDuration = DIFFICULTIES[state.currentDifficulty].holdTime;
-        setInstruction('holding', "Holding 'B'... Keep holding until light turns ON");
-
-        function trackHold() {
-            if (!state.isBPressed) return;
-            const elapsed = performance.now() - state.bPressedStartTime;
-            const pct = (elapsed / targetDuration) * 100;
-            updateHoldProgress(pct);
-
-            if (elapsed >= targetDuration) {
-                state.hasCompletedHold = true;
-                updateHoldProgress(100);
-                triggerStimulus();
-            } else {
-                state.holdAnimFrameId = requestAnimationFrame(trackHold);
-            }
-        }
-
-        state.holdAnimFrameId = requestAnimationFrame(trackHold);
+        // Immediate stimulus trigger on pressing 'B' (Zero Delay as requested!)
+        triggerStimulus();
     }
 
     function handleBKeyUp() {
@@ -453,25 +496,6 @@
             cancelAnimationFrame(state.holdAnimFrameId);
             state.holdAnimFrameId = null;
         }
-
-        // If 'B' is released prematurely before required hold duration
-        if (!state.hasCompletedHold && !state.awaitingResponse) {
-            updateHoldProgress(0);
-            state.prematureReleases++;
-            sound.prematureBuzzer();
-            setInstruction('wrong-alert', "Released Too Early! You must hold 'B' until the light appears");
-            
-            // Log premature release as fault
-            state.trialHistory.push({
-                trialNumber: state.trialHistory.length + 1,
-                colorName: 'None (Hold Error)',
-                colorHex: '#888',
-                targetKey: 'B',
-                pressedKey: 'Early Release',
-                reactionTime: 0,
-                status: 'premature'
-            });
-        }
     }
 
     // ========================================================================
@@ -481,17 +505,23 @@
         clearLamps();
         const diffConfig = DIFFICULTIES[state.currentDifficulty];
 
-        // Pick next color with CrackPsycho's exact 20% repeat algorithm
         let newLight;
-        const repeatChance = 0.20;
-        const colorKeys = [2, 4, 8, 0];
+        const currentMock = REACTION_MOCK_TESTS[state.currentTestId - 1] || REACTION_MOCK_TESTS[0];
+        const trialIdx = state.totalAttempts;
 
-        if (Math.random() < repeatChance && state.lastLight !== null) {
-            newLight = state.lastLight;
+        if (currentMock && currentMock.colors && trialIdx < currentMock.colors.length) {
+            newLight = currentMock.colors[trialIdx];
         } else {
-            // Filter out or pick among choices
-            const otherColors = colorKeys.filter(c => c !== state.lastLight);
-            newLight = otherColors[Math.floor(Math.random() * otherColors.length)];
+            // Pick next color with CrackPsycho's exact 20% repeat algorithm
+            const repeatChance = 0.20;
+            const colorKeys = [2, 4, 8, 0];
+
+            if (Math.random() < repeatChance && state.lastLight !== null) {
+                newLight = state.lastLight;
+            } else {
+                const otherColors = colorKeys.filter(c => c !== state.lastLight);
+                newLight = otherColors[Math.floor(Math.random() * otherColors.length)];
+            }
         }
 
         state.lastLight = newLight;
@@ -572,11 +602,11 @@
         if (isCorrect) {
             state.correctAttempts++;
             sound.correctChime();
-            setInstruction('success-alert', `Correct (${config.name})! Reaction Time: <strong>${reactionTime} ms</strong>. Hold 'B' for next.`);
+            setInstruction('success-alert', `Correct (${config.name})! Reaction Time: <strong>${reactionTime} ms</strong>. Press 'B' for next.`);
         } else {
             state.wrongAttempts++;
             sound.errorBuzzer();
-            setInstruction('wrong-alert', `Wrong Key! Expected <strong>${config.key} (${config.name})</strong>, pressed "${keyLabel}". Status: <strong>NOT SUITABLE</strong> (0 errors allowed). Hold 'B' for next.`);
+            setInstruction('wrong-alert', `Wrong Key! Expected <strong>${config.key} (${config.name})</strong>, pressed "${keyLabel}". Status: <strong>NOT SUITABLE</strong> (0 errors allowed). Press 'B' for new color.`);
         }
 
         state.trialHistory.push({
@@ -848,6 +878,10 @@
                 e.preventDefault();
             }
 
+            // Only respond when Reaction Test module is active
+            const reactionMod = document.getElementById('module-reaction');
+            if (!reactionMod || reactionMod.style.display === 'none') return;
+
             if (!state.testActive || state.testOver) return;
 
             const isBKey = (key === 'b' || key === 'B' || code === 'KeyB');
@@ -880,20 +914,20 @@
                 let responseKey = null;
                 let displayKey = null;
 
-                if (key === '2' || code === 'Digit2' || code === 'Numpad2') {
-                    responseKey = '2';
-                    displayKey = '2';
-                } else if (key === '4' || code === 'Digit4' || code === 'Numpad4') {
-                    responseKey = '4';
-                    displayKey = '4';
-                } else if (key === '8' || code === 'Digit8' || code === 'Numpad8') {
-                    responseKey = '8';
-                    displayKey = '8';
+                if (key === '2' || key === '6' || code === 'Digit2' || code === 'Numpad2' || code === 'Digit6' || code === 'Numpad6') {
+                    responseKey = '2'; // Red
+                    displayKey = (key === '6') ? '6' : '2';
+                } else if (key === '4' || key === 'g' || key === 'G' || code === 'Digit4' || code === 'Numpad4' || code === 'KeyG') {
+                    responseKey = '4'; // Yellow
+                    displayKey = (key.toUpperCase() === 'G') ? 'G' : '4';
+                } else if (key === '8' || key === 'h' || key === 'H' || code === 'Digit8' || code === 'Numpad8' || code === 'KeyH') {
+                    responseKey = '8'; // Green
+                    displayKey = (key.toUpperCase() === 'H') ? 'H' : '8';
                 } else if (key === '0' || code === 'Digit0' || code === 'Numpad0') {
-                    responseKey = '0';
+                    responseKey = '0'; // Blue
                     displayKey = '0';
                 } else {
-                    // Invalid key during target response (e.g. 'H', 'A', '1', '3', Space, Enter, etc.)
+                    // Invalid key during target response (e.g. 'A', '1', '3', Space, Enter, etc.)
                     responseKey = key.length === 1 ? key.toUpperCase() : key;
                     displayKey = code === 'Space' ? 'Space' : responseKey;
                 }
@@ -911,6 +945,9 @@
         window.addEventListener('keyup', (e) => {
             if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
 
+            const reactionMod = document.getElementById('module-reaction');
+            if (!reactionMod || reactionMod.style.display === 'none') return;
+
             const key = e.key;
             const code = e.code;
 
@@ -920,9 +957,9 @@
             }
 
             let responseKey = null;
-            if (key === '2' || code === 'Digit2' || code === 'Numpad2') responseKey = '2';
-            else if (key === '4' || code === 'Digit4' || code === 'Numpad4') responseKey = '4';
-            else if (key === '8' || code === 'Digit8' || code === 'Numpad8') responseKey = '8';
+            if (key === '2' || key === '6' || code === 'Digit2' || code === 'Numpad2' || code === 'Digit6' || code === 'Numpad6') responseKey = '2';
+            else if (key === '4' || key === 'g' || key === 'G' || code === 'Digit4' || code === 'Numpad4' || code === 'KeyG') responseKey = '4';
+            else if (key === '8' || key === 'h' || key === 'H' || code === 'Digit8' || code === 'Numpad8' || code === 'KeyH') responseKey = '8';
             else if (key === '0' || code === 'Digit0' || code === 'Numpad0') responseKey = '0';
 
             if (responseKey !== null) {
@@ -1004,15 +1041,17 @@
                 : '<span>🔇</span> Sound: OFF';
         }
 
-        // Instruction Agreement Checkbox
-        if (dom.chkAgreement && dom.btnProceedInstructions) {
-            dom.chkAgreement.addEventListener('change', () => {
-                const checked = dom.chkAgreement.checked;
-                dom.btnProceedInstructions.disabled = !checked;
-            });
-            dom.btnProceedInstructions.addEventListener('click', () => {
+        // Instructions Proceed Button
+        if (dom.btnProceedInstructions) {
+            dom.btnProceedInstructions.disabled = false;
+            dom.btnProceedInstructions.onclick = () => {
                 saveProfile();
                 showScreen(dom.screenDifficulty);
+            };
+        }
+        if (dom.chkAgreement && dom.btnProceedInstructions) {
+            dom.chkAgreement.addEventListener('change', () => {
+                dom.btnProceedInstructions.disabled = !dom.chkAgreement.checked;
             });
         }
 
@@ -1082,7 +1121,72 @@
                 showScreen(dom.screenInstructions);
             });
         }
+
+        // Master Battery Navigation Tabs
+        const batteryTabs = document.querySelectorAll('.battery-tab');
+        batteryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const battery = tab.dataset.battery;
+                switchBattery(battery);
+            });
+        });
+
+        // Candidate pill click to edit name & roll
+        const navPill = document.getElementById('nav-candidate-pill');
+        if (navPill) {
+            navPill.style.cursor = 'pointer';
+            navPill.title = 'Click to edit Candidate Name & Roll Number';
+            navPill.addEventListener('click', () => {
+                const newName = prompt('Enter Candidate Full Name:', state.candidateName);
+                if (newName !== null && newName.trim()) {
+                    state.candidateName = newName.trim();
+                    if (dom.inputCandidateName) dom.inputCandidateName.value = state.candidateName;
+                    localStorage.setItem('gmrc_candidate_name', state.candidateName);
+                }
+                const newRoll = prompt('Enter Roll Number:', state.rollNo);
+                if (newRoll !== null && newRoll.trim()) {
+                    state.rollNo = newRoll.trim();
+                    if (dom.inputRollNo) dom.inputRollNo.value = state.rollNo;
+                    localStorage.setItem('gmrc_roll_no', state.rollNo);
+                }
+                updateNavPill();
+            });
+        }
     }
+
+    // ========================================================================
+    // Master Battery Switching Function
+    // ========================================================================
+    function switchBattery(battery) {
+        const tabs = document.querySelectorAll('.battery-tab');
+        tabs.forEach(t => {
+            if (t.dataset.battery === battery) {
+                t.classList.add('active');
+            } else {
+                t.classList.remove('active');
+            }
+        });
+
+        const modules = document.querySelectorAll('.test-module-container');
+        modules.forEach(m => {
+            m.style.display = 'none';
+            m.classList.remove('active');
+        });
+
+        const targetModule = document.getElementById(`module-${battery}`);
+        if (targetModule) {
+            targetModule.style.display = 'block';
+            targetModule.classList.add('active');
+        }
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.switchBattery = switchBattery;
+    window.ReactionModule = {
+        init: renderReactionTestSelector,
+        switchTest: switchReactionTest
+    };
 
     // ========================================================================
     // Initialization
@@ -1092,6 +1196,7 @@
         setupKeyboardListeners();
         setupVirtualKeypadListeners();
         setupUIEventHandlers();
+        renderReactionTestSelector();
         showScreen(dom.screenInstructions);
     });
 

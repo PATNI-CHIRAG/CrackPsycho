@@ -1,0 +1,10 @@
+# Temporary & cache folders
+chrome_temp/
+__pycache__/
+*.pyc
+*.py
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
